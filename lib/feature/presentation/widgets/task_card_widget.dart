@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:to_do_list/core/theme/colors.dart';
 import 'package:to_do_list/feature/presentation/pages/sections/task_add_dialog_section.dart';
+import 'package:to_do_list/feature/presentation/widgets/alert_dialog.dart';
 import 'package:to_do_list/feature/presentation/widgets/text_widget.dart';
 
 class TaskCardWidget extends StatelessWidget {
@@ -99,7 +100,9 @@ class TaskCardWidget extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   InkWell(child: Image.asset(height: 20, "assets/edit.png")),
-                  InkWell(child: Image.asset(height: 20, "assets/delete.png")),
+                  InkWell(onTap: () {
+                    alertDialog(context);
+                  },child: Image.asset(height: 20, "assets/delete.png")),
                 ],
               ),
             ),

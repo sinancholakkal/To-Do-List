@@ -79,6 +79,7 @@ Future<dynamic> taskAddDialogSection({
                       return Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: TextFormField(
+                          readOnly: true,
                           style: TextStyle(color: kwhite),
                           validator:
                               (value) => Validation.dateValidation(value),
