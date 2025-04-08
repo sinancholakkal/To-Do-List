@@ -17,7 +17,7 @@ class _SearchAndAddSectionState extends State<SearchAndAddSection> {
   late TextEditingController dateController;
   @override
   void initState() {
-    titleController = TextEditingController(text: "Helloooo");
+    titleController = TextEditingController();
     descriptionController = TextEditingController();
     dateController = TextEditingController();
     super.initState();
@@ -47,7 +47,7 @@ class _SearchAndAddSectionState extends State<SearchAndAddSection> {
           InkWell(
             onTap: () {
               //Calling dialog for entering new task------------
-              taskAddDialogSection(context: context,dateController: dateController,descriptionController: descriptionController,titleController:titleController);
+              taskAddDialogSection(type: TaskAddDialogType.forAdd,context: context,dateController: dateController,descriptionController: descriptionController,titleController:titleController);
             },
             child: Padding(
               padding: const EdgeInsets.all(8.0),

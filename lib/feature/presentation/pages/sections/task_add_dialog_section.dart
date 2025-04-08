@@ -1,8 +1,10 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:to_do_list/core/theme/colors.dart';
 import 'package:to_do_list/core/until/validation.dart';
+import 'package:to_do_list/feature/presentation/bloc/date_picker_bloc/date_picker_bloc.dart';
 import 'package:to_do_list/feature/presentation/widgets/text_form_field_widget.dart';
 import 'package:to_do_list/feature/presentation/widgets/text_widget.dart';
 
@@ -11,6 +13,7 @@ Future<dynamic> taskAddDialogSection({
   required TextEditingController titleController,
   required descriptionController,
   required TextEditingController dateController,
+  required TaskAddDialogType type,
 }) {
   GlobalKey<FormState> _key = GlobalKey<FormState>();
   return showDialog(
@@ -44,8 +47,7 @@ Future<dynamic> taskAddDialogSection({
                   //Title field----------------
                   TextFormFieldWidget(
                     validator: (value) {
-                     return Validation.titleValidation(value);
-                      
+                      return Validation.titleValidation(value);
                     },
                     controller: titleController,
                     labelText: "Title",
@@ -54,9 +56,8 @@ Future<dynamic> taskAddDialogSection({
                   ),
                   //Description field------------
                   TextFormFieldWidget(
-                    validator: (value){
+                    validator: (value) {
                       return Validation.descriptionValidation(value);
-                      
                     },
                     controller: descriptionController,
                     labelText: "Description...",
@@ -64,20 +65,38 @@ Future<dynamic> taskAddDialogSection({
                     height: 1,
                   ),
                   //Due date field---------------
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: TextFormField(
-                      validator: (value) => Validation.dateValidation(value),
-                      controller: dateController,
-                      decoration: InputDecoration(
-                        
-                        label: TextWidget(text: "Due date"),
-                        suffixIcon: InkWell(
-                          onTap: () {},
-                          child: Icon(Icons.date_range, color: kwhite),
+                  BlocBuilder<DatePickerBloc, DatePickerState>(
+                    builder: (context, state) {
+                      if (state is DateLoadedState) {
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          dateController.text = state.date;
+                        });
+                      } else if (state is DateResetState) {
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          dateController.text = "";
+                        });
+                      }
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: TextFormField(
+                          style: TextStyle(color: kwhite),
+                          validator:
+                              (value) => Validation.dateValidation(value),
+                          controller: dateController,
+                          decoration: InputDecoration(
+                            label: TextWidget(text: "Due date"),
+                            suffixIcon: InkWell(
+                              onTap: () {
+                                context.read<DatePickerBloc>().add(
+                                  DateSelectEvent(context: context),
+                                );
+                              },
+                              child: Icon(Icons.date_range, color: kwhite),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
+                      );
+                    },
                   ),
                   SizedBox(height: 15),
                   InkWell(
@@ -103,5 +122,12 @@ Future<dynamic> taskAddDialogSection({
         ),
       );
     },
-  );
+  ).then((_) {
+    titleController.clear();
+    descriptionController.clear();
+    dateController.clear();
+    context.read<DatePickerBloc>().add(DateResetEvent());
+  });
 }
+
+enum TaskAddDialogType { forEdit, forAdd }
