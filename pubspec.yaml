@@ -61,6 +61,7 @@ flutter:
   assets:
     - assets/edit.png
     - assets/delete.png
+    - assets/submitt.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
