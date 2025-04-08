@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:to_do_list/core/theme/colors.dart';
-import 'package:to_do_list/feature/presentation/pages/sections/task_add_dialog_section.dart';
+import 'package:to_do_list/feature/presentation/pages/screen_home/sections/task_add_dialog_section.dart';
 import 'package:to_do_list/feature/presentation/widgets/text_form_field_widget.dart';
 import 'package:to_do_list/feature/presentation/widgets/text_widget.dart';
 

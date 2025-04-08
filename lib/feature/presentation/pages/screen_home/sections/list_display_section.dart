@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:to_do_list/core/theme/colors.dart';
-import 'package:to_do_list/feature/presentation/pages/sections/pending_and_complete_section.dart';
+import 'package:to_do_list/feature/presentation/pages/screen_home/sections/pending_and_complete_section.dart';
 import 'package:to_do_list/feature/presentation/widgets/task_card_widget.dart';
 
 class ListDisplaySection extends StatefulWidget {

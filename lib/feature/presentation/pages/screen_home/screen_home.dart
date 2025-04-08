@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:to_do_list/feature/presentation/pages/sections/list_display_section.dart';
-import 'package:to_do_list/feature/presentation/pages/sections/search_and_add_section.dart';
+import 'package:to_do_list/feature/presentation/pages/screen_home/sections/list_display_section.dart';
+import 'package:to_do_list/feature/presentation/pages/screen_home/sections/search_and_add_section.dart';
 
 class ScreenHome extends StatelessWidget {
   const ScreenHome({super.key});
