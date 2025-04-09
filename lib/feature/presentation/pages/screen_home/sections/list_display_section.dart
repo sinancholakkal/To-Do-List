@@ -17,8 +17,7 @@ class ListDisplaySection extends StatefulWidget {
 }
 
 class _ListDisplaySectionState extends State<ListDisplaySection> {
-  List<bool> taskCompletionStates = [];
-
+  ValueNotifier<List<bool>> taskCompletionStates = ValueNotifier([]);
 
   @override
   void initState() {
@@ -52,30 +51,85 @@ class _ListDisplaySectionState extends State<ListDisplaySection> {
                         return Center(child: CircularProgressIndicator());
                       } else if (state is TaskAllGetSuccessState) {
                         taskModels = state.taskModel;
-                        context.read<PendingAndCompletedBloc>().add(CountInitialEvent(pendingCount: state.pendingCount, completedCount: state.completedCount));
+                        taskCompletionStates.value =
+                            taskModels.map((e) => e.isCompleted).toList();
+                        context.read<PendingAndCompletedBloc>().add(
+                          CountInitialEvent(
+                            pendingCount: state.pendingCount,
+                            completedCount: state.completedCount,
+                            taskLength: state.taskModel.length
+                          ),
+                        );
                       }
                       if (taskModels.isEmpty) {
-                        
                         return Center(child: Text("No task yet"));
                       } else {
-                        return ListView.builder(
-                          physics: BouncingScrollPhysics(),
-                          itemBuilder: (context, index) {
-                            taskCompletionStates.add(taskModels[index].isCompleted);
-                            return TaskCardWidget(
-                              isCompleted: taskCompletionStates[index],
-                              taskModel: taskModels[index],
-                              onToggle: () {
-                                log("Toggle changed");
-                                setState(() {
-                                  taskCompletionStates[index] =
-                                      !taskCompletionStates[index];
-                                      log(taskCompletionStates[index].toString());
-                                });
+                        return ValueListenableBuilder(
+                          valueListenable: taskCompletionStates,
+                          builder: (context, completionList, child) {
+                            return ListView.builder(
+                              physics: BouncingScrollPhysics(),
+                              itemBuilder: (context, index) {
+                                // taskCompletionStates.add(
+                                //   taskModels[index].isCompleted,
+                                // );
+                                return TaskCardWidget(
+                                  taskCompletionStates: taskCompletionStates,
+                                  index: index,
+                                  taskModel: taskModels[index],
+                                  onToggle: () {
+                                    log("Toggle changed");
+                                    // setState(() {
+                                    final updatedList = List<bool>.from(
+                                      taskCompletionStates.value,
+                                    );
+                                    updatedList[index] = !updatedList[index];
+                                    taskCompletionStates.value = updatedList;
+                                    log(
+                                      taskCompletionStates.value[index]
+                                          .toString(),
+                                    );
+                                    // });
+                                    final pState =
+                                        context
+                                            .read<PendingAndCompletedBloc>()
+                                            .state;
+                                    if (pState is CountLoadedState) {
+                                      log(pState.pendingCount.toString());
+                                      log(pState.completedCount.toString());
+                                      if (completionList[index] == false) {
+                                        log("Counter initial called");
+                                        context
+                                            .read<PendingAndCompletedBloc>()
+                                            .add(
+                                              CountInitialEvent(
+                                                taskLength: pState.taskLength,
+                                                pendingCount:
+                                                    pState.pendingCount - 1,
+                                                completedCount:
+                                                    pState.completedCount + 1,
+                                              ),
+                                            );
+                                      } else {
+                                        context
+                                            .read<PendingAndCompletedBloc>()
+                                            .add(
+                                              CountInitialEvent(
+                                                taskLength: pState.taskLength,
+                                                pendingCount:
+                                                    pState.pendingCount + 1,
+                                                completedCount:
+                                                    pState.completedCount - 1,
+                                              ),
+                                            );
+                                      }
+                                    }
+                                  },
+                                );
                               },
+                              itemCount: taskModels.length,
                             );
                           },
-                          itemCount: taskModels.length,
                         );
                       }
                     },

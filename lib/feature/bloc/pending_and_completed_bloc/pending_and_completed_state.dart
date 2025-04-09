@@ -7,5 +7,6 @@ final class PendingAndCompletedInitial extends PendingAndCompletedState {}
 class CountLoadedState extends PendingAndCompletedState{
   final int pendingCount;
   final int completedCount;
-  CountLoadedState({required this.pendingCount,required this.completedCount});
+  final int taskLength;
+  CountLoadedState({required this.pendingCount,required this.completedCount,required this.taskLength});
 }

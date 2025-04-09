@@ -71,13 +71,13 @@ class PendingAndCompletedSection extends StatelessWidget {
               child: Center(
                 child: BlocBuilder<PendingAndCompletedBloc, PendingAndCompletedState>(
                   builder: (context, state) {
-                    int pending =0;
+                    int taskLength =0;
                     int completed =0;
                     if(state is CountLoadedState){
-                      pending = state.pendingCount;
+                      taskLength = state.taskLength;
                       completed = state.completedCount;
                     }
-                    return TextWidget(text: "$completed/$pending", color: kwhite, size: 13);
+                    return TextWidget(text: "$completed/$taskLength", color: kwhite, size: 13);
                   },
                 ),
               ),

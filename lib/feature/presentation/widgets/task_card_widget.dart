@@ -9,111 +9,119 @@ import 'package:to_do_list/feature/presentation/widgets/alert_dialog.dart';
 import 'package:to_do_list/feature/presentation/widgets/text_widget.dart';
 
 class TaskCardWidget extends StatelessWidget {
-  const TaskCardWidget({
+   TaskCardWidget({
     super.key,
-    required this.isCompleted,
+    required this.index,
     required this.onToggle,
-    required this.taskModel
+    required this.taskModel,
+    required this.taskCompletionStates
   });
-
-  final bool isCompleted;
+  ValueNotifier<List<bool>> taskCompletionStates;
+  final int index;
   final VoidCallback onToggle;
   final TaskModel taskModel;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ConstrainedBox(
-        constraints: BoxConstraints(minHeight: 72),
-        child: Container(
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: Color(0xFF262626),
-            borderRadius: BorderRadius.circular(4),
-          ),
-          child: Center(
-            child: ListTile(
-              leading: GestureDetector(
-                onTap: onToggle,
-                child:
-                    isCompleted
-                        ? Icon(Icons.check_circle, color: Color(0xFF1E6F9F))
-                        : Container(
-                          width: 18,
-                          height: 18,
-                          decoration: BoxDecoration(
-                            color: Colors.transparent,
-                            border: Border.all(color: kwhite, width: 1.5),
-                            borderRadius: BorderRadius.circular(100),
+    return ValueListenableBuilder(
+      valueListenable: taskCompletionStates,
+      builder: (context, completionList, child) {
+        bool isCompleted = completionList[index];
+        return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ConstrainedBox(
+          constraints: BoxConstraints(minHeight: 72),
+          child: Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Color(0xFF262626),
+              borderRadius: BorderRadius.circular(4),
+            ),
+            child: Center(
+              child: ListTile(
+                leading: GestureDetector(
+                  onTap: onToggle,
+                  child:
+                      isCompleted
+                          ? Icon(Icons.check_circle, color: Color(0xFF1E6F9F))
+                          : Container(
+                            width: 18,
+                            height: 18,
+                            decoration: BoxDecoration(
+                              color: Colors.transparent,
+                              border: Border.all(color: kwhite, width: 1.5),
+                              borderRadius: BorderRadius.circular(100),
+                            ),
                           ),
-                        ),
-              ),
-              //Task view ontap----------
-              title: GestureDetector(
-                onTap: () {
-                  log("Task viewed");
-                  taskAddDialogSection(type: TaskAddDialogType.forEdit,context: context, titleController: TextEditingController(text: "Do Math Homework"), descriptionController: TextEditingController(text:  "I have to complete math homework and draw a simple circle using pencil"), dateController: TextEditingController(text: "Due date: 09-March-2025"));
-                },
-                //Title section------
-                child: TextWidget(
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
-                  text: taskModel.title,
-                  size: 21,
-                  color: isCompleted ? Color(0xFF808080) : kwhite,
-                  decoration: isCompleted ? TextDecoration.lineThrough : null,
-                  decorationThickness: 2,
-                  decorationColor: Color(0xFF808080),
                 ),
-              ),
-              //Task view ontap----------
-              subtitle: GestureDetector(
-                onTap: () {
-                  log("Task viewed");
-                  taskAddDialogSection(type: TaskAddDialogType.forEdit,context: context, titleController: TextEditingController(text: taskModel.title), descriptionController: TextEditingController(text:  taskModel.description), dateController: TextEditingController(text: taskModel.date));
-                },
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                //Task view ontap----------
+                title: GestureDetector(
+                  onTap: () {
+                    log("Task viewed");
+                    taskAddDialogSection(type: TaskAddDialogType.forEdit,context: context, titleController: TextEditingController(text: "Do Math Homework"), descriptionController: TextEditingController(text:  "I have to complete math homework and draw a simple circle using pencil"), dateController: TextEditingController(text: "Due date: 09-March-2025"));
+                  },
+                  //Title section------
+                  child: TextWidget(
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                    text: taskModel.title,
+                    size: 21,
+                    color: isCompleted ? Color(0xFF808080) : kwhite,
+                    decoration: isCompleted ? TextDecoration.lineThrough : null,
+                    decorationThickness: 2,
+                    decorationColor: Color(0xFF808080),
+                  ),
+                ),
+                //Task view ontap----------
+                subtitle: GestureDetector(
+                  onTap: () {
+                    log("Task viewed");
+                    taskAddDialogSection(type: TaskAddDialogType.forEdit,context: context, titleController: TextEditingController(text: taskModel.title), descriptionController: TextEditingController(text:  taskModel.description), dateController: TextEditingController(text: taskModel.date));
+                  },
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      //Desscription setion-----------
+                      TextWidget(
+                        text:
+                            taskModel.description,
+                        color: Color(0xFF808080),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        decoration: isCompleted ? TextDecoration.lineThrough : null,
+                        decorationThickness: 2,
+                        decorationColor: Color(0xFF808080),
+                      ),
+                      TextWidget(
+                        text: taskModel.date,
+                        color: Colors.white60,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        decoration: isCompleted ? TextDecoration.lineThrough : null,
+                        decorationThickness: 2,
+                        decorationColor: Color(0xFF808080),
+                      ),
+                    ],
+                  ),
+                ),
+                trailing: Row(
+                  spacing: 5,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    //Desscription setion-----------
-                    TextWidget(
-                      text:
-                          taskModel.description,
-                      color: Color(0xFF808080),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      decoration: isCompleted ? TextDecoration.lineThrough : null,
-                      decorationThickness: 2,
-                      decorationColor: Color(0xFF808080),
-                    ),
-                    TextWidget(
-                      text: taskModel.date,
-                      color: Colors.white60,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      decoration: isCompleted ? TextDecoration.lineThrough : null,
-                      decorationThickness: 2,
-                      decorationColor: Color(0xFF808080),
-                    ),
+                    InkWell(child: Image.asset(height: 20, "assets/edit.png")),
+                    InkWell(onTap: () {
+                      alertDialog(context);
+                    },child: Image.asset(height: 20, "assets/delete.png")),
                   ],
                 ),
-              ),
-              trailing: Row(
-                spacing: 5,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  InkWell(child: Image.asset(height: 20, "assets/edit.png")),
-                  InkWell(onTap: () {
-                    alertDialog(context);
-                  },child: Image.asset(height: 20, "assets/delete.png")),
-                ],
               ),
             ),
           ),
         ),
-      ),
+      );
+      },
+      
     );
   }
 }

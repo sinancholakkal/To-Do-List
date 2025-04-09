@@ -28,6 +28,7 @@ Future<dynamic> taskAddDialogSection({
           listener: (context, state) {
             if(state is TaskAddedState){
               Navigator.pop(context);
+              context.read<TaskBloc>().add(TaskAllGetEvent());
               log("New Task dialog poped");
             }
           },
@@ -124,7 +125,9 @@ Future<dynamic> taskAddDialogSection({
                           );
                           context.read<TaskBloc>().add(
                             TaskAddEvent(taskModel: taskModel),
+                            
                           );
+                          
                         } else {
                           log("Field not validated");
                         }
