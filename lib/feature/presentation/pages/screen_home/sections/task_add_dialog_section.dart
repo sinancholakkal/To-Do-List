@@ -66,6 +66,7 @@ Future<dynamic> taskAddDialogSection({
                     ),
                     //Description field------------
                     TextFormFieldWidget(
+                      maxLine: 5,
                       validator: (value) {
                         return Validation.descriptionValidation(value);
                       },

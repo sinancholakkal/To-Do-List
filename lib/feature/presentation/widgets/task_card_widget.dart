@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:to_do_list/core/theme/colors.dart';
+import 'package:to_do_list/domain/model/task_model.dart';
 import 'package:to_do_list/feature/presentation/pages/screen_home/sections/task_add_dialog_section.dart';
 import 'package:to_do_list/feature/presentation/widgets/alert_dialog.dart';
 import 'package:to_do_list/feature/presentation/widgets/text_widget.dart';
@@ -12,10 +13,12 @@ class TaskCardWidget extends StatelessWidget {
     super.key,
     required this.isCompleted,
     required this.onToggle,
+    required this.taskModel
   });
 
   final bool isCompleted;
   final VoidCallback onToggle;
+  final TaskModel taskModel;
 
   @override
   Widget build(BuildContext context) {
@@ -52,10 +55,11 @@ class TaskCardWidget extends StatelessWidget {
                   log("Task viewed");
                   taskAddDialogSection(type: TaskAddDialogType.forEdit,context: context, titleController: TextEditingController(text: "Do Math Homework"), descriptionController: TextEditingController(text:  "I have to complete math homework and draw a simple circle using pencil"), dateController: TextEditingController(text: "Due date: 09-March-2025"));
                 },
+                //Title section------
                 child: TextWidget(
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
-                  text: "Do Math Homework",
+                  text: taskModel.title,
                   size: 21,
                   color: isCompleted ? Color(0xFF808080) : kwhite,
                   decoration: isCompleted ? TextDecoration.lineThrough : null,
@@ -67,15 +71,16 @@ class TaskCardWidget extends StatelessWidget {
               subtitle: GestureDetector(
                 onTap: () {
                   log("Task viewed");
-                  taskAddDialogSection(type: TaskAddDialogType.forEdit,context: context, titleController: TextEditingController(text: "Do Math Homework"), descriptionController: TextEditingController(text:  "I have to complete math homework and draw a simple circle using pencil"), dateController: TextEditingController(text: "Due date: 09-March-2025"));
+                  taskAddDialogSection(type: TaskAddDialogType.forEdit,context: context, titleController: TextEditingController(text: taskModel.title), descriptionController: TextEditingController(text:  taskModel.description), dateController: TextEditingController(text: taskModel.date));
                 },
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    //Desscription setion-----------
                     TextWidget(
                       text:
-                          "I have to complete math homework and draw a simple circle using pencil",
+                          taskModel.description,
                       color: Color(0xFF808080),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -84,7 +89,7 @@ class TaskCardWidget extends StatelessWidget {
                       decorationColor: Color(0xFF808080),
                     ),
                     TextWidget(
-                      text: "Due date: 09-March-2025",
+                      text: taskModel.date,
                       color: Colors.white60,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:to_do_list/domain/repository/task_services.dart';
 import 'package:to_do_list/feature/presentation/pages/screen_home/sections/list_display_section.dart';
 import 'package:to_do_list/feature/presentation/pages/screen_home/sections/search_and_add_section.dart';
 
@@ -7,6 +8,7 @@ class ScreenHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TaskServices.getAllTaskes();
     return Scaffold(
       body: Stack(
         children: [

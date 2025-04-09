@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:to_do_list/core/theme/colors.dart';
+import 'package:to_do_list/feature/bloc/pending_and_completed_bloc/pending_and_completed_bloc.dart';
 import 'package:to_do_list/feature/presentation/widgets/text_widget.dart';
 
 class PendingAndCompletedSection extends StatelessWidget {
@@ -28,7 +30,22 @@ class PendingAndCompletedSection extends StatelessWidget {
                 borderRadius: BorderRadius.circular(999),
               ),
               child: Center(
-                child: TextWidget(text: "2", color: kwhite, size: 13),
+                child: BlocBuilder<
+                  PendingAndCompletedBloc,
+                  PendingAndCompletedState
+                >(
+                  builder: (context, state) {
+                    int pending = 0;
+                    if (state is CountLoadedState) {
+                      pending = state.pendingCount;
+                    }
+                    return TextWidget(
+                      text: pending.toString(),
+                      color: kwhite,
+                      size: 13,
+                    );
+                  },
+                ),
               ),
             ),
           ],
@@ -52,7 +69,17 @@ class PendingAndCompletedSection extends StatelessWidget {
                 borderRadius: BorderRadius.circular(999),
               ),
               child: Center(
-                child: TextWidget(text: "1/2", color: kwhite, size: 13),
+                child: BlocBuilder<PendingAndCompletedBloc, PendingAndCompletedState>(
+                  builder: (context, state) {
+                    int pending =0;
+                    int completed =0;
+                    if(state is CountLoadedState){
+                      pending = state.pendingCount;
+                      completed = state.completedCount;
+                    }
+                    return TextWidget(text: "$completed/$pending", color: kwhite, size: 13);
+                  },
+                ),
               ),
             ),
           ],
