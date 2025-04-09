@@ -1,7 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:to_do_list/feature/presentation/bloc/date_picker_bloc/date_picker_bloc.dart';
+import 'package:to_do_list/feature/bloc/date_picker_bloc/date_picker_bloc.dart';
+import 'package:to_do_list/feature/bloc/task_bloc/task_bloc.dart';
 import 'package:to_do_list/feature/presentation/pages/screen_splash/screen_splash.dart';
 import 'package:to_do_list/firebase_options.dart';
 
@@ -20,9 +21,13 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => DatePickerBloc(),
         ),
+        BlocProvider(
+          create: (context) => TaskBloc(),
+        ),
         
       ],
       child:MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primaryColor: Color(0xFF1E6F9F),
         ),
