@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:to_do_list/feature/bloc/date_picker_bloc/date_picker_bloc.dart';
 import 'package:to_do_list/feature/bloc/pending_and_completed_bloc/pending_and_completed_bloc.dart';
+import 'package:to_do_list/feature/bloc/search_bloc/search_bloc.dart';
 import 'package:to_do_list/feature/bloc/task_bloc/task_bloc.dart';
 import 'package:to_do_list/feature/presentation/pages/screen_splash/screen_splash.dart';
 import 'package:to_do_list/firebase_options.dart';
@@ -27,6 +28,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => PendingAndCompletedBloc(),
+        ),
+         BlocProvider(
+          create: (context) => SearchBloc(),
         ),
         
       ],

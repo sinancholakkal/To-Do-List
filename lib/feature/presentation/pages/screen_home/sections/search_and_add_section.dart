@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:to_do_list/core/theme/colors.dart';
+import 'package:to_do_list/feature/bloc/search_bloc/search_bloc.dart';
+import 'package:to_do_list/feature/bloc/task_bloc/task_bloc.dart';
 import 'package:to_do_list/feature/presentation/pages/screen_home/sections/task_add_dialog_section.dart';
+import 'package:to_do_list/feature/presentation/pages/screen_search/screen_search.dart';
 import 'package:to_do_list/feature/presentation/widgets/text_form_field_widget.dart';
 import 'package:to_do_list/feature/presentation/widgets/text_widget.dart';
 
@@ -40,7 +44,15 @@ class _SearchAndAddSectionState extends State<SearchAndAddSection> {
           Flexible(
             //Search field widget
             child: TextFormFieldWidget(
-              labelText: "🚀 Search...",
+              ontap: () => {
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>ScreenSearch())).whenComplete((){
+                  context.read<TaskBloc>().add(TaskAllGetEvent());
+                  context.read<SearchBloc>().add(SearchInitialEvent());
+                })
+              },
+              readOnly: true,
+              //labelText: "🚀 Search...",
+              hintText: "🚀 Search...",
               borderColor: Color(0xFF0D0D0D),
             ),
           ),

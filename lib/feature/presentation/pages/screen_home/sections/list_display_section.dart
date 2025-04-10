@@ -7,6 +7,7 @@ import 'package:to_do_list/domain/model/task_model.dart';
 import 'package:to_do_list/feature/bloc/pending_and_completed_bloc/pending_and_completed_bloc.dart';
 import 'package:to_do_list/feature/bloc/task_bloc/task_bloc.dart';
 import 'package:to_do_list/feature/presentation/pages/screen_home/sections/pending_and_complete_section.dart';
+import 'package:to_do_list/feature/presentation/widgets/circular_widget.dart';
 import 'package:to_do_list/feature/presentation/widgets/task_card_widget.dart';
 import 'package:to_do_list/feature/presentation/widgets/text_widget.dart';
 
@@ -49,7 +50,7 @@ class _ListDisplaySectionState extends State<ListDisplaySection> {
                     builder: (context, state) {
                       List<TaskModel> taskModels = [];
                       if (state is TaskGetLoadingState) {
-                        return Center(child: CircularProgressIndicator());
+                        return CircularWidget();
                       } else if (state is TaskAllGetSuccessState) {
                         taskModels = state.taskModel;
                         taskCompletionStates.value =
