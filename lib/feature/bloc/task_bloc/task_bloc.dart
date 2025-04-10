@@ -57,5 +57,13 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
         log("something issue while update isCompleted task $e");
       }
     });
+      on<TaskDeleteEvent>((event, emit)async {
+      try{
+        await TaskServices.taskDelete(id: event.id);
+        emit(TaskDeletedState());
+      }catch(e){
+        log("something issue while delete task $e");
+      }
+    });
   }
 }

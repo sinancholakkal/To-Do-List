@@ -53,4 +53,11 @@ class TaskServices {
       // "id":taskModel.id
     });
   }
+
+   static Future<void>taskDelete({required String id})async{
+    final firestore = FirebaseFirestore.instance;
+    await firestore
+    .collection('task')
+    .doc(id).delete();
+  }
 }

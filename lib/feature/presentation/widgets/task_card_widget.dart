@@ -154,7 +154,7 @@ class TaskCardWidget extends StatelessWidget {
                             ),
                             type: TaskAddDialogType.forEdit,
                             isCompleted: completionList[index],
-                            id: taskModel.id
+                            id: taskModel.id,
                           );
                         },
                         child: Image.asset(height: 20, "assets/edit.png"),
@@ -162,7 +162,7 @@ class TaskCardWidget extends StatelessWidget {
                       //Delete button-----------------------------
                       InkWell(
                         onTap: () {
-                          alertDialog(context);
+                          alertDialog(context: context, id: taskModel.id);
                         },
                         child: Image.asset(height: 20, "assets/delete.png"),
                       ),

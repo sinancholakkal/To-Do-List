@@ -13,3 +13,4 @@ class TaskAllGetSuccessState extends TaskState{
   TaskAllGetSuccessState({required this.taskModel,required this.pendingCount,required this.completedCount});
 }
 class TaskUpdatedState extends TaskState{}
+class TaskDeletedState extends TaskState{}

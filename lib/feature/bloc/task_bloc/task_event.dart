@@ -17,3 +17,7 @@ class TaskIsCompletedUdateEvent extends TaskEvent{
   final String id;
   TaskIsCompletedUdateEvent({required this.isCompleted,required this.id});
 }
+class TaskDeleteEvent extends TaskEvent{
+  final String id;
+  TaskDeleteEvent({required this.id});
+}
