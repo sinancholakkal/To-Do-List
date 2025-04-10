@@ -11,7 +11,8 @@ class TextWidget extends StatelessWidget {
     this.overflow,
     this.decoration,
     this.decorationColor,
-    this.decorationThickness
+    this.decorationThickness,
+    this.textAlign
   });
   final String text;
   final Color? color;
@@ -22,9 +23,11 @@ class TextWidget extends StatelessWidget {
   final TextDecoration? decoration;
   final Color? decorationColor;
   final double? decorationThickness;
+  final TextAlign? textAlign;
   @override
   Widget build(BuildContext context) {
     return Text(
+      textAlign: textAlign,
       text,
       style: TextStyle(
         decoration: decoration,

@@ -8,6 +8,7 @@ import 'package:to_do_list/feature/bloc/pending_and_completed_bloc/pending_and_c
 import 'package:to_do_list/feature/bloc/task_bloc/task_bloc.dart';
 import 'package:to_do_list/feature/presentation/pages/screen_home/sections/pending_and_complete_section.dart';
 import 'package:to_do_list/feature/presentation/widgets/task_card_widget.dart';
+import 'package:to_do_list/feature/presentation/widgets/text_widget.dart';
 
 class ListDisplaySection extends StatefulWidget {
   const ListDisplaySection({super.key});
@@ -62,7 +63,17 @@ class _ListDisplaySectionState extends State<ListDisplaySection> {
                         );
                       }
                       if (taskModels.isEmpty) {
-                        return Center(child: Text("No task yet"));
+                        return Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox(height: 66,),
+                            Image.asset("assets/empty.png",width: 56,height: 56,),
+                            SizedBox(height: 20,),
+                            TextWidget(text: "You don’t have any tasks yet.",size: 16,color: Color(0xFF808080),fontWeight: FontWeight.w700,),
+                            TextWidget(text: "Start adding tasks and manage your\n time effectively.",size: 16,color: Color(0xFF808080),textAlign: TextAlign.center,)
+                          ],
+                        );
                       } else {
                         return ValueListenableBuilder(
                           valueListenable: taskCompletionStates,
