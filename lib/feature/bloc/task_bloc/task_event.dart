@@ -12,3 +12,8 @@ class TaskUpdateEvent extends TaskEvent{
   final TaskModel taskModel;
   TaskUpdateEvent({required this.taskModel});
 }
+class TaskIsCompletedUdateEvent extends TaskEvent{
+  final bool isCompleted;
+  final String id;
+  TaskIsCompletedUdateEvent({required this.isCompleted,required this.id});
+}

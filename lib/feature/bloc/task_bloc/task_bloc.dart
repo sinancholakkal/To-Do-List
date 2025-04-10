@@ -49,5 +49,13 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
         log("something issue while update task $e");
       }
     });
+     on<TaskIsCompletedUdateEvent>((event, emit)async {
+      try{
+        await TaskServices.taskIsCompletedUpdate(isCompleted: event.isCompleted,id: event.id);
+        log("isCompleted updated in firebase");
+      }catch(e){
+        log("something issue while update isCompleted task $e");
+      }
+    });
   }
 }

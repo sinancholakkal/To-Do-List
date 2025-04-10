@@ -80,6 +80,7 @@ class _ListDisplaySectionState extends State<ListDisplaySection> {
                                     final updatedList = List<bool>.from(
                                       taskCompletionStates.value,
                                     );
+                                    context.read<TaskBloc>().add(TaskIsCompletedUdateEvent(isCompleted: !updatedList[index], id: taskModels[index].id));
                                     updatedList[index] = !updatedList[index];
                                     taskCompletionStates.value = updatedList;
                                     log(
