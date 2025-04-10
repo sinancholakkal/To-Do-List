@@ -120,9 +120,10 @@ class TaskCardWidget extends StatelessWidget {
                           decorationThickness: 2,
                           decorationColor: Color(0xFF808080),
                         ),
+                        //Due date---------------
                         TextWidget(
-                          text: taskModel.date,
-                          color: Colors.white60,
+                          text: taskModel.date.startsWith("Due")?taskModel.date:"Due: ${taskModel.date}",
+                          color: (taskModel.date.startsWith("Due")&&taskModel.isCompleted==false)?Colors.red:Colors.white60,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           decoration:
