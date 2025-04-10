@@ -12,3 +12,4 @@ class TaskAllGetSuccessState extends TaskState{
   final int completedCount;
   TaskAllGetSuccessState({required this.taskModel,required this.pendingCount,required this.completedCount});
 }
+class TaskUpdatedState extends TaskState{}

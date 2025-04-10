@@ -70,16 +70,13 @@ class _ListDisplaySectionState extends State<ListDisplaySection> {
                             return ListView.builder(
                               physics: BouncingScrollPhysics(),
                               itemBuilder: (context, index) {
-                                // taskCompletionStates.add(
-                                //   taskModels[index].isCompleted,
-                                // );
+                                //Calling task card------------------
                                 return TaskCardWidget(
                                   taskCompletionStates: taskCompletionStates,
                                   index: index,
                                   taskModel: taskModels[index],
                                   onToggle: () {
                                     log("Toggle changed");
-                                    // setState(() {
                                     final updatedList = List<bool>.from(
                                       taskCompletionStates.value,
                                     );
@@ -89,7 +86,6 @@ class _ListDisplaySectionState extends State<ListDisplaySection> {
                                       taskCompletionStates.value[index]
                                           .toString(),
                                     );
-                                    // });
                                     final pState =
                                         context
                                             .read<PendingAndCompletedBloc>()

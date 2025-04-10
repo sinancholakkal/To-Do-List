@@ -37,7 +37,16 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
         emit(TaskAllGetSuccessState(taskModel: taskModels,pendingCount: pendingCount,completedCount: completedCount));
         log("New Task Added");
       }catch(e){
-        log("something issue while adding new task $e");
+        log("something issue while getting all task $e");
+      }
+    });
+
+    on<TaskUpdateEvent>((event, emit)async {
+      try{
+        await TaskServices.taskUpdate(taskModel: event.taskModel);
+        emit(TaskUpdatedState());
+      }catch(e){
+        log("something issue while update task $e");
       }
     });
   }

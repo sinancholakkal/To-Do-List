@@ -31,4 +31,17 @@ class TaskServices {
     }
     return taskModels;
   }
+
+  static Future<void>taskUpdate({required TaskModel taskModel})async{
+    final firestore = FirebaseFirestore.instance;
+    await firestore
+    .collection('task')
+    .doc(taskModel.id).update({
+      "title": taskModel.title,
+      "description":taskModel.description,
+      "date":taskModel.date,
+     // "isCompleted":taskModel.isCompleted,
+      // "id":taskModel.id
+    });
+  }
 }

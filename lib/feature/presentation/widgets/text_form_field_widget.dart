@@ -10,7 +10,8 @@ class TextFormFieldWidget extends StatelessWidget {
     this.height,
     this.controller,
     this.validator,
-    this.maxLine
+    this.maxLine,
+    this.readOnly
   });
   final String labelText;
   final Color? borderColor;
@@ -18,10 +19,12 @@ class TextFormFieldWidget extends StatelessWidget {
   final TextEditingController? controller;
   String? Function(String?)? validator;
   final int? maxLine;
+  final bool? readOnly;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      readOnly: readOnly??false,
       maxLines: maxLine,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       controller: controller,

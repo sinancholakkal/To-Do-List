@@ -8,3 +8,7 @@ class TaskAddEvent extends TaskEvent {
   TaskAddEvent({required this.taskModel});
 }
 class TaskAllGetEvent extends TaskEvent {}
+class TaskUpdateEvent extends TaskEvent{
+  final TaskModel taskModel;
+  TaskUpdateEvent({required this.taskModel});
+}
