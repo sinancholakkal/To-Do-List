@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,7 +32,7 @@ class _ScreenSearchState extends State<ScreenSearch> {
           children: [
             //Cupertino search field and Back button--------------
             SearchingSection(screenWidth: screenWidth),
-          //There displaying initially all task and based on the search result----------------
+          //There displaying initially all task and based on the search result-----------------
            SearchItemDisplaySection() ,
           ],
         ),
