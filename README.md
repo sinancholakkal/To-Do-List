@@ -1,16 +1,24 @@
-# to_do_list
+# 📝 To-Do List App
 
-A new Flutter project.
+A simple and efficient To-Do List application to manage your daily tasks. You can add, delete, and mark tasks as completed.
 
-## Getting Started
+## 🚀 Features
 
-This project is a starting point for a Flutter application.
+- Add new tasks
+- Mark tasks as completed
+- Delete tasks
+- Edit task
+- The end date is indicated
+## 🛠️ Tech Stack
 
-A few resources to get you started if this is your first Flutter project:
+- Flutter
+- Dart 
+- Firebase
+- Bloc
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 📱 Screenshots
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<!-- Add screenshots if you have -->
+<img src="screenshots/home_screen.png" width="300"/>
+![image](https://github.com/user-attachments/assets/d170b003-85de-4c42-bc11-d9f222c445ed)
+![image](https://github.com/user-attachments/assets/0aac30a0-937d-4811-b4d1-16c5c24b87a4)
