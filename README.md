@@ -22,3 +22,7 @@ A simple and efficient To-Do List application to manage your daily tasks. You ca
 <img src="screenshots/home_screen.png" width="300"/>
 ![image](https://github.com/user-attachments/assets/d170b003-85de-4c42-bc11-d9f222c445ed)
 ![image](https://github.com/user-attachments/assets/0aac30a0-937d-4811-b4d1-16c5c24b87a4)
+
+## 📥 Download APK
+
+👉 [Download To-Do List APK (Google Drive)](https://drive.google.com/file/d/1IEYnEM1ePANhE0K4o9AwxELnSc8Rz8ZD/view?usp=sharing)
