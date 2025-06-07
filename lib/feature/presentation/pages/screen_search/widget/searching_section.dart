@@ -6,7 +6,7 @@ import 'package:to_do_list/core/theme/colors.dart';
 import 'package:to_do_list/feature/bloc/search_bloc/search_bloc.dart';
 
 class SearchingSection extends StatelessWidget {
-  const SearchingSection({
+  const  SearchingSection({
     super.key,
     required this.screenWidth,
   });
